@@ -29,12 +29,12 @@ class Patreon extends AbstractProvider
 
 	public function getResourceOwnerDetailsUrl(AccessToken $token)
 	{
-		return $this->domain . 'api/oauth2/v2/identity';
+		return $this->domain . 'api/oauth2/v2/identity?include=memberships.currently_entitled_tiers,memberships.campaign&fields[user]=email,first_name,full_name,image_url,last_name,thumb_url,url,vanity,is_email_verified&fields[member]=currently_entitled_amount_cents,lifetime_support_cents,campaign_lifetime_support_cents,last_charge_status,patron_status,last_charge_date,pledge_relationship_start';
 	}
 
 	protected function getDefaultScopes()
 	{
-		return ['identity', 'identity.memberships'];
+		return ['identity.memberships identity campaigns'];
 	}
 
 	protected function checkResponse(ResponseInterface $response, $data)
