@@ -34,7 +34,7 @@ class Patreon extends AbstractProvider
 
 	protected function getDefaultScopes()
 	{
-		return ['identity.memberships identity campaigns'];
+		return ['identity.memberships identity identity[email] campaigns'];
 	}
 
 	protected function checkResponse(ResponseInterface $response, $data)

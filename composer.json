@@ -15,7 +15,7 @@
     "patreon"
   ],
   "require": {
-    "php": "^7.4.0",
+    "php": ">=7.4.0",
     "ext-json": "*",
     "league/oauth2-client": "^2.0"
   },

@@ -36,4 +36,58 @@ class PatreonResourceOwner implements ResourceOwnerInterface
 	{
 		return $this->response;
 	}
+
+	/**
+	 * @param string[] $allowedTierIds
+	 */
+	public function getPatreonTier(array $allowedTierIds): ?string
+	{
+		$included = $this->response['included'] ?: null;
+
+		if ($included) {
+			foreach ($included as $key => $inc) {
+				if ($inc['type'] === 'tier' && in_array($inc['id'], $allowedTierIds)) {
+					return $inc['id'];
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public function getUserName(): ?string
+	{
+		if (array_key_exists('full_name', $this->response['data']['attributes'])) {
+			return $this->response['data']['attributes']['full_name'];
+		}
+
+		return null;
+	}
+
+	public function getFirstName(): ?string
+	{
+		if (array_key_exists('first_name', $this->response['data']['attributes'])) {
+			return $this->response['data']['attributes']['first_name'];
+		}
+
+		return null;
+	}
+
+	public function getLastName(): ?string
+	{
+		if (array_key_exists('last_name', $this->response['data']['attributes'])) {
+			return $this->response['data']['attributes']['last_name'];
+		}
+
+		return null;
+	}
+
+	public function getEmail(): ?string
+	{
+		if (array_key_exists('email', $this->response['data']['attributes'])) {
+			return $this->response['data']['attributes']['email'];
+		}
+
+		return null;
+	}
 }
